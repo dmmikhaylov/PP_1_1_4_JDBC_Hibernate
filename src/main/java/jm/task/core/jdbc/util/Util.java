@@ -6,10 +6,10 @@ import java.sql.DriverManager;
 import java.sql.SQLException;
 
 public class Util {
-    public static final String DB_URL = "jdbc:mysql://localhost:3306/mydb";
-    public static final String DB_USERNAME = "root";
-    public static final String DB_PASSWORD = "root";
-    public static final String DB_DRIVER = "com.mysql.cj.jdbc.Driver";
+    private static final String DB_URL = "jdbc:mysql://localhost:3306/mydb";
+    private static final String DB_USERNAME = "root";
+    private static final String DB_PASSWORD = "root";
+    private static final String DB_DRIVER = "com.mysql.cj.jdbc.Driver";
 
     public static Connection getConnection () {
         Connection connection = null;
@@ -21,5 +21,15 @@ public class Util {
             e.printStackTrace();
         }
         return connection;
+    }
+
+    public static void closeConnection(Connection connection) {
+        try {
+            if (!connection.isClosed()) {
+                connection.close();
+            }
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
     }
 }
